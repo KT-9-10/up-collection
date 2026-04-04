@@ -1,8 +1,8 @@
 extends Node
 
-const SAVE_PATH := "user://kt910_flap_up_highscore.json"
-const VERSION := 1
-const VERSION_MINOR := 1
+const SAVE_PATH := "user://kt910_collection_flap_up_highscore.json"
+const VERSION := 2
+const VERSION_MINOR := 0
 const SECRET := "tiny_action_big_results"
 
 var high_score := 0

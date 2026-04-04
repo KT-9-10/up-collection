@@ -10,6 +10,15 @@ func _physics_process(delta: float) -> void:
 	match game.current_state:
 		game.State.START:
 			if Input.is_action_just_pressed("jump"):
+				if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+					var rect = Rect2(
+						game.back_title_button.position,
+						game.back_title_button.size
+					)
+					var mouse_pos = get_viewport().get_mouse_position()
+					if rect.has_point(mouse_pos):
+						return
+
 				game.start_game()
 				jump()
 				$JumpSE.play()

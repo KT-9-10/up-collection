@@ -261,6 +261,7 @@ script = ExtResource("1_lbhrr")
 static_patterns = Array[PackedScene]([ExtResource("2_lbhrr"), ExtResource("3_p57ef"), ExtResource("4_u5sy4"), ExtResource("6_0tnpc"), ExtResource("5_gee14"), ExtResource("7_vtaks")])
 charge_patterns = Array[PackedScene]([ExtResource("8_trtic"), ExtResource("9_ir15t"), ExtResource("10_ca42v"), ExtResource("8_kvpfn")])
 missile_patterns = Array[PackedScene]([ExtResource("12_ssvqc"), ExtResource("12_ca42v"), ExtResource("13_rysoc"), ExtResource("14_rysoc")])
+metadata/_edit_vertical_guides_ = [8.0]
 
 [node name="Background" type="Node2D" parent="." unique_id=991248776]
 
@@ -327,6 +328,14 @@ position = Vector2(-64, 53)
 zoom = Vector2(4, 4)
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=413021364]
+
+[node name="BackTitleButton" type="Button" parent="UI" unique_id=46402953]
+custom_minimum_size = Vector2(260, 120)
+offset_left = 8.0
+offset_top = 8.0
+theme_override_fonts/font = ExtResource("7_u5sy4")
+theme_override_font_sizes/font_size = 72
+text = "← TITLE"
 
 [node name="TitleLabel" type="Control" parent="UI" unique_id=576162094]
 layout_mode = 3
@@ -516,5 +525,6 @@ volume_db = -8.0
 [node name="BirdTimer" type="Timer" parent="." unique_id=723309190]
 wait_time = 0.5
 
+[connection signal="pressed" from="UI/BackTitleButton" to="." method="_on_back_title_button_pressed"]
 [connection signal="timeout" from="MissileTimer" to="." method="_on_missile_timer_timeout"]
 [connection signal="timeout" from="BirdTimer" to="." method="_on_bird_timer_timeout"]

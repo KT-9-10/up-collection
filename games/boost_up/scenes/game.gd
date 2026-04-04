@@ -54,6 +54,7 @@ func _ready() -> void:
 	# プレイヤーをアイドル状態にする
 	$Player.current_state = $Player.State.IDLE
 	update_background_speed()
+	$UI/BackTitleButton.show()
 
 
 func _process(delta: float) -> void:
@@ -63,11 +64,21 @@ func _process(delta: float) -> void:
 	match current_state:
 		State.TITLE:
 			if Input.is_action_just_pressed("jump"):
+				if Input.is_mouse_button_pressed(MOUSE_BUTTON_LEFT):
+					var rect = Rect2(
+						$UI/BackTitleButton.position,
+						$UI/BackTitleButton.size
+					)
+					var mouse_pos = get_viewport().get_mouse_position()
+					if rect.has_point(mouse_pos):
+						return
+				
 				$UI/TitleLabel.hide()
 				$UI/MessageLabel.hide()
 				current_state = State.PLAYING
 				# プレイヤーを通常状態にする
 				$Player.current_state = $Player.State.NORMAL
+				$UI/BackTitleButton.hide()
 				
 		State.PLAYING:
 			spawn_obstacles()
@@ -103,7 +114,7 @@ func _process(delta: float) -> void:
 			if Input.is_action_just_pressed("jump"):
 				get_tree().reload_current_scene()
 		
-	print("level: ", progress_level, " speed: ", scroll_speed)
+	#print("level: ", progress_level, " speed: ", scroll_speed)
 	
 	
 func spawn_static_pattern() -> void:
@@ -409,3 +420,7 @@ func shake_camera():
 func _on_bird_timer_timeout() -> void:
 	if randf() < 0.3:
 		spawn_bird()
+
+
+func _on_back_title_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://games/main.tscn")

@@ -10,6 +10,7 @@
 [ext_resource type="AudioStream" uid="uid://70jb4mkidahu" path="res://games/flap_up/assets/sounds/sfx_sounds_falling3.wav" id="5_p57ef"]
 [ext_resource type="FontFile" uid="uid://b1m727lru44g2" path="res://games/flap_up/assets/fonts/x12y16pxMaruMonica.ttf" id="5_u5sy4"]
 [ext_resource type="Shader" uid="uid://dhbp4nsw04cj6" path="res://games/flap_up/scenes/title_label.tres" id="6_kvpfn"]
+[ext_resource type="FontFile" uid="uid://cibl2ydj4wjkl" path="res://games/boost_up/fonts/x10y12pxDonguriDuel.ttf" id="7_1jqxj"]
 [ext_resource type="AudioStream" uid="uid://b27wu2pt84anb" path="res://games/flap_up/assets/sounds/sfx_movement_ladder2b.wav" id="7_u5sy4"]
 [ext_resource type="Shader" uid="uid://d358tfbw1gs23" path="res://games/flap_up/scenes/game_over_label.tres" id="8_dinhu"]
 [ext_resource type="PackedScene" uid="uid://cc6tvxvw78hh" path="res://games/flap_up/scenes/jump_effect.tscn" id="13_kvuet"]
@@ -68,19 +69,29 @@ texture = ExtResource("2_gee14")
 centered = false
 
 [node name="Player" parent="." unique_id=1537798451 instance=ExtResource("1_uwrxv")]
-position = Vector2(-48, 8)
+position = Vector2(-48, 12)
 
 [node name="Obstacles" type="Node2D" parent="." unique_id=976929724]
 
 [node name="UI" type="CanvasLayer" parent="." unique_id=1660941607]
 
+[node name="BackTitleButton" type="Button" parent="UI" unique_id=1425974875]
+custom_minimum_size = Vector2(260, 120)
+offset_left = 8.0
+offset_top = 8.0
+offset_right = 268.0
+offset_bottom = 128.0
+theme_override_fonts/font = ExtResource("7_1jqxj")
+theme_override_font_sizes/font_size = 72
+text = "← TITLE"
+
 [node name="TitleLabel" type="Label" parent="UI" unique_id=1905578523]
 material = SubResource("ShaderMaterial_dinhu")
 anchors_preset = -1
 anchor_left = 0.5
-anchor_top = 0.3
+anchor_top = 0.37
 anchor_right = 0.5
-anchor_bottom = 0.3
+anchor_bottom = 0.37
 grow_horizontal = 2
 grow_vertical = 2
 theme_override_colors/font_color = Color(0.8745098, 0.44313726, 0.14901961, 1)
@@ -180,5 +191,6 @@ stream = ExtResource("5_p57ef")
 stream = ExtResource("7_u5sy4")
 volume_db = -3.0
 
+[connection signal="pressed" from="UI/BackTitleButton" to="." method="_on_back_title_button_pressed"]
 [connection signal="timeout" from="SpawnTimer" to="." method="_on_timer_timeout"]
 [connection signal="timeout" from="LevelUpTimer" to="." method="_on_level_up_timer_timeout"]

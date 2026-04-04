@@ -3,7 +3,7 @@ extends Node2D
 enum State { START, PLAY, GAME_OVER, RESTART_WAIT }
 
 @export var jump_effect_scene: PackedScene
-
+@onready var back_title_button = $UI/BackTitleButton
 var score: int
 var current_state: State
 var pipe_scene: PackedScene = preload("res://games/flap_up/scenes/pipe.tscn")
@@ -31,6 +31,7 @@ func _ready() -> void:
 	$UI/MessageLabel.show()
 	# 難易度の初期化
 	difficulty = 0
+	back_title_button.show()
 
 
 func _process(_delta: float) -> void:
@@ -52,6 +53,7 @@ func start_game() -> void:
 	$UI/MessageLabel.hide()
 	$SpawnTimer.start()
 	$LevelUpTimer.start()
+	back_title_button.hide()
 
 
 func game_over() -> void:
@@ -132,3 +134,7 @@ func _on_level_up_timer_timeout() -> void:
 		p.difficulty = difficulty
 	# パイプの発声間隔を短く
 	$SpawnTimer.wait_time *= 0.95
+
+
+func _on_back_title_button_pressed() -> void:
+	get_tree().change_scene_to_file("res://games/main.tscn")
