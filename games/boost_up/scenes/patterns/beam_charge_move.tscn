@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bkhb4wn7gc1dv"]
+
+[ext_resource type="Script" uid="uid://dgvscbka8v4wj" path="res://games/boost_up/scenes/patterns/beam_charge_move.gd" id="1_6smxc"]
+[ext_resource type="PackedScene" uid="uid://bcmi1nxl00npy" path="res://games/boost_up/scenes/obstacles/beam_chage.tscn" id="2_hudso"]
+
+[node name="BeamChargeMove" type="Node2D" unique_id=1706753575]
+script = ExtResource("1_6smxc")
+
+[node name="BeamCharge" parent="." unique_id=1900951668 instance=ExtResource("2_hudso")]
+position = Vector2(0, -8)
+loop_count = 3
+play_se = true
+wait_time = 0.3
+charge_step_time = 0.3

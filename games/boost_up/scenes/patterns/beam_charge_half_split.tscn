@@ -1,0 +1,33 @@
+[gd_scene format=3 uid="uid://cuorrtf4r7phs"]
+
+[ext_resource type="Script" uid="uid://clu6rg0kbmeo8" path="res://games/boost_up/scenes/patterns/beam_charge_half_split.gd" id="1_s2iyi"]
+[ext_resource type="PackedScene" uid="uid://bcmi1nxl00npy" path="res://games/boost_up/scenes/obstacles/beam_chage.tscn" id="2_7hguk"]
+
+[node name="BeamChargeHalfSplit" type="Node2D" unique_id=1706753575]
+script = ExtResource("1_s2iyi")
+gap_time = 2.0
+
+[node name="BeamCharge" parent="." unique_id=1900951668 instance=ExtResource("2_7hguk")]
+play_se = true
+
+[node name="BeamCharge2" parent="." unique_id=127173049 instance=ExtResource("2_7hguk")]
+position = Vector2(0, 16)
+
+[node name="BeamCharge3" parent="." unique_id=1625100007 instance=ExtResource("2_7hguk")]
+position = Vector2(0, 32)
+
+[node name="BeamCharge7" parent="." unique_id=332689380 instance=ExtResource("2_7hguk")]
+position = Vector2(0, 48)
+
+[node name="BeamCharge8" parent="." unique_id=1237993323 instance=ExtResource("2_7hguk")]
+position = Vector2(0, -48)
+
+[node name="BeamCharge4" parent="." unique_id=1123126769 instance=ExtResource("2_7hguk")]
+position = Vector2(0, -64)
+play_se = true
+
+[node name="BeamCharge5" parent="." unique_id=753602721 instance=ExtResource("2_7hguk")]
+position = Vector2(0, -32)
+
+[node name="BeamCharge6" parent="." unique_id=543573395 instance=ExtResource("2_7hguk")]
+position = Vector2(0, -16)

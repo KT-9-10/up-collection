@@ -1,0 +1,14 @@
+[gd_scene format=3 uid="uid://bcamp4oi2gbgt"]
+
+[ext_resource type="Script" uid="uid://h1x5qpsixtn1" path="res://scenes/obstacles/beam_chage.gd" id="1_vg2gd"]
+
+[node name="Missile" type="Area2D" unique_id=1900951668]
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_vg2gd")
+
+[node name="Missile" type="AnimatedSprite2D" parent="." unique_id=1673130784]
+
+[node name="Warning" type="AnimatedSprite2D" parent="." unique_id=1667096584]
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]

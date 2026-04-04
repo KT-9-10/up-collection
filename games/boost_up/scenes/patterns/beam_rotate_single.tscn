@@ -1,0 +1,20 @@
+[gd_scene format=3 uid="uid://cg7rjm5ishww5"]
+
+[ext_resource type="Script" uid="uid://rgk0veywbat7" path="res://games/boost_up/scenes/patterns/beam_rotate_single.gd" id="1_get7j"]
+[ext_resource type="PackedScene" uid="uid://cjgmyucfcgbjc" path="res://games/boost_up/scenes/obstacles/beam_rotate.tscn" id="2_get7j"]
+
+[node name="BeamStaticSingle" type="Node2D" unique_id=1706753575]
+script = ExtResource("1_get7j")
+
+[node name="BeamRotate" parent="." unique_id=1900951668 instance=ExtResource("2_get7j")]
+position = Vector2(42, 1.1920929e-07)
+rotation = 1606.1826
+
+[node name="FinishNotifier" type="VisibleOnScreenNotifier2D" parent="." unique_id=245682939]
+position = Vector2(-160, 0)
+
+[node name="DeleteNotifier" type="VisibleOnScreenNotifier2D" parent="." unique_id=1677020070]
+position = Vector2(72, 0)
+
+[connection signal="screen_exited" from="FinishNotifier" to="." method="_on_finish_notifier_screen_exited"]
+[connection signal="screen_exited" from="DeleteNotifier" to="." method="_on_delete_notifier_screen_exited"]

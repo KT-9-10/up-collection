@@ -1,0 +1,88 @@
+[gd_scene format=3 uid="uid://dmylexa5hlt5l"]
+
+[ext_resource type="Script" uid="uid://c6qx4f2x7yrx4" path="res://scenes/test.gd" id="1_74lek"]
+[ext_resource type="PackedScene" uid="uid://bseg8f0wvcxdl" path="res://scenes/floor.tscn" id="1_bl13t"]
+[ext_resource type="PackedScene" uid="uid://b02h2jabhke1m" path="res://scenes/player.tscn" id="2_iyx0m"]
+[ext_resource type="PackedScene" uid="uid://c4ebif7c08a6a" path="res://scenes/patterns/beam_charge_single.tscn" id="3_lpvoh"]
+[ext_resource type="PackedScene" uid="uid://bcamp4oi2gbgt" path="res://scenes/obstacles/missile.tscn" id="4_74lek"]
+[ext_resource type="PackedScene" uid="uid://cjgmyucfcgbjc" path="res://scenes/obstacles/beam_rotate.tscn" id="5_j5jx5"]
+
+[node name="Test" type="Node2D" unique_id=1042163117]
+script = ExtResource("1_74lek")
+static_patterns = Array[PackedScene]([ExtResource("5_j5jx5")])
+charge_patterns = Array[PackedScene]([ExtResource("3_lpvoh")])
+metadata/_edit_vertical_guides_ = [96.0, -177.0, -120.0]
+
+[node name="Background2" type="ColorRect" parent="." unique_id=1861019726]
+offset_left = -121.0
+offset_top = -69.0
+offset_right = 121.0
+offset_bottom = 69.0
+color = Color(0.75686276, 0.8509804, 0.9490196, 1)
+
+[node name="Floor" parent="." unique_id=1251486006 instance=ExtResource("1_bl13t")]
+position = Vector2(-168, 57)
+
+[node name="Floor2" parent="." unique_id=844628426 instance=ExtResource("1_bl13t")]
+position = Vector2(-173, -139)
+
+[node name="Obstacles" type="Node2D" parent="." unique_id=844124517]
+position = Vector2(-120, 0)
+
+[node name="Obstacles_charge" type="Node2D" parent="." unique_id=1925074103]
+position = Vector2(120, 0)
+
+[node name="Player" parent="." unique_id=1618353808 instance=ExtResource("2_iyx0m")]
+position = Vector2(-56, 42)
+
+[node name="Camera2D2" type="Camera2D" parent="." unique_id=506914307]
+zoom = Vector2(4, 4)
+
+[node name="Missile" parent="." unique_id=1900951668 instance=ExtResource("4_74lek")]
+position = Vector2(120, -51)
+follow_player_y = false
+acceleration = 20.0
+warning_early_time = 1.0
+
+[node name="Missile2" parent="." unique_id=456199538 instance=ExtResource("4_74lek")]
+position = Vector2(120, -32)
+follow_player_y = false
+acceleration = 20.0
+wait_time = 0.8
+warning_early_time = 1.0
+
+[node name="Missile3" parent="." unique_id=239823338 instance=ExtResource("4_74lek")]
+position = Vector2(120, -13)
+follow_player_y = false
+acceleration = 20.0
+wait_time = 1.6
+warning_early_time = 1.0
+
+[node name="Missile4" parent="." unique_id=2013667748 instance=ExtResource("4_74lek")]
+position = Vector2(120, 6)
+follow_player_y = false
+acceleration = 20.0
+wait_time = 2.4
+warning_early_time = 1.0
+
+[node name="Missile5" parent="." unique_id=737509475 instance=ExtResource("4_74lek")]
+position = Vector2(120, 25)
+follow_player_y = false
+acceleration = 20.0
+wait_time = 3.2
+warning_early_time = 1.0
+
+[node name="Missile6" parent="." unique_id=664702916 instance=ExtResource("4_74lek")]
+position = Vector2(120, 44)
+follow_player_y = false
+acceleration = 20.0
+wait_time = 4.0
+warning_early_time = 1.0
+
+[node name="BeamStatic" parent="." unique_id=871014050 instance=ExtResource("5_j5jx5")]
+position = Vector2(-57, -12)
+rotation = -620.9856
+rotatetion_speed_min = 90.0
+rotatetion_speed_max = 140.0
+
+[connection signal="finished" from="Missile6" to="." method="on_missile_finished"]

@@ -1,0 +1,22 @@
+[gd_scene format=3 uid="uid://bb4ai2fy83nu7"]
+
+[ext_resource type="Texture2D" uid="uid://dp82kgb52bvkm" path="res://assets/Bird.png" id="1_3vyb7"]
+[ext_resource type="Script" uid="uid://fb2s6e8a32ap" path="res://scenes/player.gd" id="1_g2els"]
+
+[sub_resource type="CircleShape2D" id="CircleShape2D_3vyb7"]
+radius = 5.0
+
+[node name="Player" type="CharacterBody2D" unique_id=1537798451]
+script = ExtResource("1_g2els")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=24371157]
+position = Vector2(-1, 1)
+texture = ExtResource("1_3vyb7")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="." unique_id=448580315]
+shape = SubResource("CircleShape2D_3vyb7")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=707798000]
+rect = Rect2(-1, -1, 2, 2)
+
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

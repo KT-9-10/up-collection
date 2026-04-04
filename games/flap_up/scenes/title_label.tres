@@ -1,0 +1,19 @@
+[gd_resource type="VisualShader" format=3 uid="uid://dhbp4nsw04cj6"]
+
+[sub_resource type="Gradient" id="Gradient_tabos"]
+colors = PackedColorArray(0.8745098, 0.44313726, 0.14901961, 1, 0.9843137, 0.9490196, 0.21176471, 1)
+
+[sub_resource type="GradientTexture2D" id="GradientTexture2D_8btkf"]
+gradient = SubResource("Gradient_tabos")
+fill_to = Vector2(0, 0.23764259)
+
+[sub_resource type="VisualShaderNodeTexture" id="VisualShaderNodeTexture_xr8bf"]
+texture = SubResource("GradientTexture2D_8btkf")
+
+[resource]
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(704, 112)
+nodes/fragment/2/node = SubResource("VisualShaderNodeTexture_xr8bf")
+nodes/fragment/2/position = Vector2(224, 128)
+nodes/fragment/connections = PackedInt32Array(2, 0, 0, 0)

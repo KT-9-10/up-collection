@@ -1,0 +1,516 @@
+[gd_scene format=3 uid="uid://ckhig1gtgt5cv"]
+
+[ext_resource type="Script" uid="uid://05s2gcleqext" path="res://games/boost up/scenes/game.gd" id="1_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://b02h2jabhke1m" path="res://games/boost up/scenes/player.tscn" id="1_uwrxv"]
+[ext_resource type="PackedScene" uid="uid://bseg8f0wvcxdl" path="res://games/boost up/scenes/floor.tscn" id="1_yqjtg"]
+[ext_resource type="PackedScene" uid="uid://bxgufokn6coph" path="res://games/boost up/scenes/patterns/beam_static_single.tscn" id="2_lbhrr"]
+[ext_resource type="PackedScene" uid="uid://dnxua2l4b84fp" path="res://games/boost up/scenes/patterns/beam_static_double.tscn" id="3_p57ef"]
+[ext_resource type="PackedScene" uid="uid://15xg623ihq16" path="res://games/boost up/scenes/patterns/beam_static_2_lane.tscn" id="4_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://c3ymh3ku0lbfq" path="res://games/boost up/scenes/patterns/beam_static_vertical.tscn" id="5_gee14"]
+[ext_resource type="PackedScene" uid="uid://cjcixnnoqj0f0" path="res://games/boost up/scenes/patterns/beam_static_slant.tscn" id="6_0tnpc"]
+[ext_resource type="FontFile" uid="uid://cibl2ydj4wjkl" path="res://games/boost up/fonts/x10y12pxDonguriDuel.ttf" id="7_u5sy4"]
+[ext_resource type="PackedScene" uid="uid://cg7rjm5ishww5" path="res://games/boost up/scenes/patterns/beam_rotate_single.tscn" id="7_vtaks"]
+[ext_resource type="PackedScene" uid="uid://cuorrtf4r7phs" path="res://games/boost up/scenes/patterns/beam_charge_half_split.tscn" id="8_kvpfn"]
+[ext_resource type="PackedScene" uid="uid://c4ebif7c08a6a" path="res://games/boost up/scenes/patterns/beam_charge_single.tscn" id="8_trtic"]
+[ext_resource type="PackedScene" uid="uid://bkhb4wn7gc1dv" path="res://games/boost up/scenes/patterns/beam_charge_move.tscn" id="9_ir15t"]
+[ext_resource type="PackedScene" uid="uid://dkqd5xlsas6fw" path="res://games/boost up/scenes/patterns/beam_charge_sweep.tscn" id="10_ca42v"]
+[ext_resource type="PackedScene" uid="uid://dmqylxnd0itsf" path="res://games/boost up/scenes/patterns/missile_multi.tscn" id="12_ca42v"]
+[ext_resource type="PackedScene" uid="uid://bcamp4oi2gbgt" path="res://games/boost up/scenes/obstacles/missile.tscn" id="12_ssvqc"]
+[ext_resource type="PackedScene" uid="uid://bom6wyyqvuobs" path="res://games/boost up/scenes/patterns/missile_sweep.tscn" id="13_rysoc"]
+[ext_resource type="PackedScene" uid="uid://6g0me6xnkj6k" path="res://games/boost up/scenes/patterns/missile_random.tscn" id="14_rysoc"]
+[ext_resource type="Texture2D" uid="uid://b054fgq1iuj3u" path="res://games/boost up/graphics/cloud.png" id="16_5newe"]
+[ext_resource type="Texture2D" uid="uid://do0iv3xdvj5on" path="res://games/boost up/graphics/mountain_front.png" id="16_264po"]
+[ext_resource type="Texture2D" uid="uid://dx6ebc25a8rb" path="res://games/boost up/graphics/mountain_back.png" id="17_37s47"]
+[ext_resource type="Shader" uid="uid://cbupbj1t6b65e" path="res://games/boost up/scenes/game.tres" id="18_37s47"]
+[ext_resource type="AudioStream" uid="uid://bl5gusmo7l7bc" path="res://games/boost up/sounds/sfx_sounds_fanfare3.wav" id="23_bt5mj"]
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_e1j6l"]
+default_input_values = [0, 0.0, 1, 2.0]
+operator = 2
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_pl11u"]
+default_input_values = [0, 0.0, 1, 0.5]
+operator = 1
+
+[sub_resource type="VisualShaderNodeClamp" id="VisualShaderNodeClamp_bhx41"]
+default_input_values = [0, 0.045, 1, 0.0, 2, 1.0]
+
+[sub_resource type="VisualShaderNodeIf" id="VisualShaderNodeIf_qnb83"]
+default_input_values = [0, 0.0, 1, 0.5, 2, 1e-05, 3, Vector3(0, 0, 0), 4, Vector3(0, 0, 0), 5, Vector3(0, 0, 0)]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_sww3w"]
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_suyxu"]
+constant = Color(1, 0.6666667, 0.43137255, 1)
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_sgl2t"]
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, Vector3(1.645, 1.005, -0.475)]
+op_type = 3
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_qouja"]
+parameter_name = "Progress"
+default_value_enabled = true
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_wljb1"]
+constant = Color(0.16078432, 0.19607843, 0.40784314, 1)
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_v2yb1"]
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, Vector3(1.645, 1.005, -0.475)]
+op_type = 3
+
+[sub_resource type="VisualShaderNodeClamp" id="VisualShaderNodeClamp_js0lu"]
+default_input_values = [0, 0.045, 1, 0.0, 2, 1.0]
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_gxtfn"]
+default_input_values = [0, 0.0, 1, 2.0]
+operator = 2
+
+[sub_resource type="VisualShader" id="VisualShader_twgab"]
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(1184, 368)
+nodes/fragment/2/node = SubResource("VisualShaderNodeInput_sww3w")
+nodes/fragment/2/position = Vector2(272, -112)
+nodes/fragment/3/node = SubResource("VisualShaderNodeColorConstant_suyxu")
+nodes/fragment/3/position = Vector2(384, -16)
+nodes/fragment/4/node = SubResource("VisualShaderNodeMix_sgl2t")
+nodes/fragment/4/position = Vector2(672, 32)
+nodes/fragment/5/node = SubResource("VisualShaderNodeFloatParameter_qouja")
+nodes/fragment/5/position = Vector2(-224, 208)
+nodes/fragment/6/node = SubResource("VisualShaderNodeColorConstant_wljb1")
+nodes/fragment/6/position = Vector2(336, 368)
+nodes/fragment/7/node = SubResource("VisualShaderNodeMix_v2yb1")
+nodes/fragment/7/position = Vector2(672, 208)
+nodes/fragment/8/node = SubResource("VisualShaderNodeClamp_js0lu")
+nodes/fragment/8/position = Vector2(368, 96)
+nodes/fragment/9/node = SubResource("VisualShaderNodeFloatOp_gxtfn")
+nodes/fragment/9/position = Vector2(176, 96)
+nodes/fragment/10/node = SubResource("VisualShaderNodeFloatOp_e1j6l")
+nodes/fragment/10/position = Vector2(384, 480)
+nodes/fragment/11/node = SubResource("VisualShaderNodeFloatOp_pl11u")
+nodes/fragment/11/position = Vector2(192, 480)
+nodes/fragment/12/node = SubResource("VisualShaderNodeClamp_bhx41")
+nodes/fragment/12/position = Vector2(576, 480)
+nodes/fragment/13/node = SubResource("VisualShaderNodeIf_qnb83")
+nodes/fragment/13/position = Vector2(976, 368)
+nodes/fragment/connections = PackedInt32Array(2, 0, 4, 0, 3, 0, 4, 1, 3, 0, 7, 0, 6, 0, 7, 1, 5, 0, 9, 0, 9, 0, 8, 0, 8, 0, 4, 2, 5, 0, 11, 0, 11, 0, 10, 0, 10, 0, 12, 0, 12, 0, 7, 2, 13, 0, 0, 0, 4, 0, 13, 3, 5, 0, 13, 0, 4, 0, 13, 5, 7, 0, 13, 4)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_02fa5"]
+shader = SubResource("VisualShader_twgab")
+shader_parameter/Progress = 0.0
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_37s47"]
+default_input_values = [0, 0.0, 1, 2.0]
+operator = 2
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_bt5mj"]
+default_input_values = [0, 0.0, 1, 0.5]
+operator = 1
+
+[sub_resource type="VisualShaderNodeClamp" id="VisualShaderNodeClamp_e1j6l"]
+default_input_values = [0, 0.045, 1, 0.0, 2, 1.0]
+
+[sub_resource type="VisualShaderNodeIf" id="VisualShaderNodeIf_pl11u"]
+default_input_values = [0, 0.0, 1, 0.5, 2, 1e-05, 3, Vector3(0, 0, 0), 4, Vector3(0, 0, 0), 5, Vector3(0, 0, 0)]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_bhx41"]
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_qnb83"]
+constant = Color(1, 0.4117647, 0.3529412, 1)
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_sww3w"]
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, Vector3(1.645, 1.005, -0.475)]
+op_type = 3
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_suyxu"]
+parameter_name = "Progress"
+default_value_enabled = true
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_sgl2t"]
+constant = Color(0.24705882, 0.12156863, 0.23529412, 1)
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_qouja"]
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, Vector3(1.645, 1.005, -0.475)]
+op_type = 3
+
+[sub_resource type="VisualShaderNodeClamp" id="VisualShaderNodeClamp_wljb1"]
+default_input_values = [0, 0.045, 1, 0.0, 2, 1.0]
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_v2yb1"]
+default_input_values = [0, 0.0, 1, 2.0]
+operator = 2
+
+[sub_resource type="VisualShader" id="VisualShader_js0lu"]
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(1184, 368)
+nodes/fragment/2/node = SubResource("VisualShaderNodeInput_bhx41")
+nodes/fragment/2/position = Vector2(272, -112)
+nodes/fragment/3/node = SubResource("VisualShaderNodeColorConstant_qnb83")
+nodes/fragment/3/position = Vector2(384, -16)
+nodes/fragment/4/node = SubResource("VisualShaderNodeMix_sww3w")
+nodes/fragment/4/position = Vector2(672, 32)
+nodes/fragment/5/node = SubResource("VisualShaderNodeFloatParameter_suyxu")
+nodes/fragment/5/position = Vector2(-224, 208)
+nodes/fragment/6/node = SubResource("VisualShaderNodeColorConstant_sgl2t")
+nodes/fragment/6/position = Vector2(336, 368)
+nodes/fragment/7/node = SubResource("VisualShaderNodeMix_qouja")
+nodes/fragment/7/position = Vector2(672, 208)
+nodes/fragment/8/node = SubResource("VisualShaderNodeClamp_wljb1")
+nodes/fragment/8/position = Vector2(368, 96)
+nodes/fragment/9/node = SubResource("VisualShaderNodeFloatOp_v2yb1")
+nodes/fragment/9/position = Vector2(176, 96)
+nodes/fragment/10/node = SubResource("VisualShaderNodeFloatOp_37s47")
+nodes/fragment/10/position = Vector2(384, 480)
+nodes/fragment/11/node = SubResource("VisualShaderNodeFloatOp_bt5mj")
+nodes/fragment/11/position = Vector2(192, 480)
+nodes/fragment/12/node = SubResource("VisualShaderNodeClamp_e1j6l")
+nodes/fragment/12/position = Vector2(576, 480)
+nodes/fragment/13/node = SubResource("VisualShaderNodeIf_pl11u")
+nodes/fragment/13/position = Vector2(976, 368)
+nodes/fragment/connections = PackedInt32Array(2, 0, 4, 0, 3, 0, 4, 1, 3, 0, 7, 0, 6, 0, 7, 1, 5, 0, 9, 0, 9, 0, 8, 0, 8, 0, 4, 2, 5, 0, 11, 0, 11, 0, 10, 0, 10, 0, 12, 0, 12, 0, 7, 2, 13, 0, 0, 0, 4, 0, 13, 3, 5, 0, 13, 0, 4, 0, 13, 5, 7, 0, 13, 4)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_gxtfn"]
+shader = SubResource("VisualShader_js0lu")
+shader_parameter/Progress = 0.0
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_twgab"]
+default_input_values = [0, 0.0, 1, 2.0]
+operator = 2
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_02fa5"]
+default_input_values = [0, 0.0, 1, 0.5]
+operator = 1
+
+[sub_resource type="VisualShaderNodeClamp" id="VisualShaderNodeClamp_nepv3"]
+default_input_values = [0, 0.045, 1, 0.0, 2, 1.0]
+
+[sub_resource type="VisualShaderNodeIf" id="VisualShaderNodeIf_7025r"]
+default_input_values = [0, 0.0, 1, 0.5, 2, 1e-05, 3, Vector3(0, 0, 0), 4, Vector3(0, 0, 0), 5, Vector3(0, 0, 0)]
+
+[sub_resource type="VisualShaderNodeInput" id="VisualShaderNodeInput_m4url"]
+input_name = "color"
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_8ool0"]
+constant = Color(0.7647059, 0.44705883, 0.5372549, 1)
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_pr1ej"]
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, Vector3(1.645, 1.005, -0.475)]
+op_type = 3
+
+[sub_resource type="VisualShaderNodeFloatParameter" id="VisualShaderNodeFloatParameter_05nbr"]
+parameter_name = "Progress"
+default_value_enabled = true
+
+[sub_resource type="VisualShaderNodeColorConstant" id="VisualShaderNodeColorConstant_0sl42"]
+constant = Color(0.27450982, 0.29411766, 0.54901963, 1)
+
+[sub_resource type="VisualShaderNodeMix" id="VisualShaderNodeMix_oaba0"]
+default_input_values = [0, Vector3(0, 0, 0), 1, Vector3(1, 1, 1), 2, Vector3(1.645, 1.005, -0.475)]
+op_type = 3
+
+[sub_resource type="VisualShaderNodeClamp" id="VisualShaderNodeClamp_458eo"]
+default_input_values = [0, 0.045, 1, 0.0, 2, 1.0]
+
+[sub_resource type="VisualShaderNodeFloatOp" id="VisualShaderNodeFloatOp_h3rex"]
+default_input_values = [0, 0.0, 1, 2.0]
+operator = 2
+
+[sub_resource type="VisualShader" id="VisualShader_fedci"]
+mode = 1
+flags/light_only = false
+nodes/fragment/0/position = Vector2(1184, 368)
+nodes/fragment/2/node = SubResource("VisualShaderNodeInput_m4url")
+nodes/fragment/2/position = Vector2(272, -112)
+nodes/fragment/3/node = SubResource("VisualShaderNodeColorConstant_8ool0")
+nodes/fragment/3/position = Vector2(384, -16)
+nodes/fragment/4/node = SubResource("VisualShaderNodeMix_pr1ej")
+nodes/fragment/4/position = Vector2(672, 32)
+nodes/fragment/5/node = SubResource("VisualShaderNodeFloatParameter_05nbr")
+nodes/fragment/5/position = Vector2(-224, 208)
+nodes/fragment/6/node = SubResource("VisualShaderNodeColorConstant_0sl42")
+nodes/fragment/6/position = Vector2(336, 368)
+nodes/fragment/7/node = SubResource("VisualShaderNodeMix_oaba0")
+nodes/fragment/7/position = Vector2(672, 208)
+nodes/fragment/8/node = SubResource("VisualShaderNodeClamp_458eo")
+nodes/fragment/8/position = Vector2(368, 96)
+nodes/fragment/9/node = SubResource("VisualShaderNodeFloatOp_h3rex")
+nodes/fragment/9/position = Vector2(176, 96)
+nodes/fragment/10/node = SubResource("VisualShaderNodeFloatOp_twgab")
+nodes/fragment/10/position = Vector2(384, 480)
+nodes/fragment/11/node = SubResource("VisualShaderNodeFloatOp_02fa5")
+nodes/fragment/11/position = Vector2(192, 480)
+nodes/fragment/12/node = SubResource("VisualShaderNodeClamp_nepv3")
+nodes/fragment/12/position = Vector2(576, 480)
+nodes/fragment/13/node = SubResource("VisualShaderNodeIf_7025r")
+nodes/fragment/13/position = Vector2(976, 368)
+nodes/fragment/connections = PackedInt32Array(2, 0, 4, 0, 3, 0, 4, 1, 3, 0, 7, 0, 6, 0, 7, 1, 5, 0, 9, 0, 9, 0, 8, 0, 8, 0, 4, 2, 5, 0, 11, 0, 11, 0, 10, 0, 10, 0, 12, 0, 12, 0, 7, 2, 13, 0, 0, 0, 4, 0, 13, 3, 5, 0, 13, 0, 4, 0, 13, 5, 7, 0, 13, 4)
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_8qswn"]
+shader = SubResource("VisualShader_fedci")
+shader_parameter/Progress = 0.0
+
+[sub_resource type="ShaderMaterial" id="ShaderMaterial_bt5mj"]
+shader = ExtResource("18_37s47")
+shader_parameter/Progress = 0.0
+
+[node name="Game" type="Node2D" unique_id=25136998]
+script = ExtResource("1_lbhrr")
+static_patterns = Array[PackedScene]([ExtResource("2_lbhrr"), ExtResource("3_p57ef"), ExtResource("4_u5sy4"), ExtResource("6_0tnpc"), ExtResource("5_gee14"), ExtResource("7_vtaks")])
+charge_patterns = Array[PackedScene]([ExtResource("8_trtic"), ExtResource("9_ir15t"), ExtResource("10_ca42v"), ExtResource("8_kvpfn")])
+missile_patterns = Array[PackedScene]([ExtResource("12_ssvqc"), ExtResource("12_ca42v"), ExtResource("13_rysoc"), ExtResource("14_rysoc")])
+
+[node name="Background" type="Node2D" parent="." unique_id=991248776]
+
+[node name="Sky" type="ColorRect" parent="Background" unique_id=1399313381]
+material = SubResource("ShaderMaterial_02fa5")
+offset_left = -173.0
+offset_top = -73.0
+offset_right = 173.0
+offset_bottom = 73.0
+color = Color(0.75686276, 0.8509804, 0.9490196, 1)
+
+[node name="Cloud" type="Parallax2D" parent="Background" unique_id=1611207966]
+scroll_offset = Vector2(0, -88)
+repeat_size = Vector2(480, 0)
+autoscroll = Vector2(-10, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/Cloud" unique_id=832714754]
+material = SubResource("ShaderMaterial_gxtfn")
+texture = ExtResource("16_5newe")
+centered = false
+
+[node name="MountainBack" type="Parallax2D" parent="Background" unique_id=1612624378]
+scroll_offset = Vector2(0, -72)
+repeat_size = Vector2(480, 0)
+autoscroll = Vector2(-40, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/MountainBack" unique_id=391611527]
+material = SubResource("ShaderMaterial_8qswn")
+texture = ExtResource("17_37s47")
+centered = false
+
+[node name="MountainFront" type="Parallax2D" parent="Background" unique_id=1517356707]
+scroll_offset = Vector2(0, -68)
+repeat_size = Vector2(480, 0)
+autoscroll = Vector2(-60, 0)
+repeat_times = 3
+
+[node name="Sprite2D" type="Sprite2D" parent="Background/MountainFront" unique_id=301197049]
+material = SubResource("ShaderMaterial_bt5mj")
+texture = ExtResource("16_264po")
+centered = false
+
+[node name="Floor" parent="." unique_id=1251486006 instance=ExtResource("1_yqjtg")]
+position = Vector2(-172, 57)
+
+[node name="Floor2" parent="." unique_id=1608981206 instance=ExtResource("1_yqjtg")]
+position = Vector2(-172, -139)
+
+[node name="Obstacles" type="Node2D" parent="." unique_id=1354035116]
+position = Vector2(113, 0)
+
+[node name="ObstaclesCharge" type="Node2D" parent="." unique_id=145973721]
+position = Vector2(-120, 0)
+
+[node name="ObstaclesMissile" type="Node2D" parent="." unique_id=1874938836]
+position = Vector2(120, 0)
+
+[node name="Player" parent="." unique_id=1618353808 instance=ExtResource("1_uwrxv")]
+position = Vector2(-64, 53)
+
+[node name="Camera2D" type="Camera2D" parent="." unique_id=692949612]
+zoom = Vector2(4, 4)
+
+[node name="UI" type="CanvasLayer" parent="." unique_id=413021364]
+
+[node name="TitleLabel" type="Control" parent="UI" unique_id=576162094]
+layout_mode = 3
+anchor_left = 0.5
+anchor_top = 0.35
+anchor_right = 0.5
+anchor_bottom = 0.35
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackLabel" type="Label" parent="UI/TitleLabel" unique_id=1581946955]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_u5sy4")
+theme_override_font_sizes/font_size = 160
+text = "BOOST UP!"
+
+[node name="FrontLabel" type="Label" parent="UI/TitleLabel" unique_id=930782610]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.8980392, 0.25882354, 0.5254902, 1)
+theme_override_fonts/font = ExtResource("7_u5sy4")
+theme_override_font_sizes/font_size = 160
+text = "BOOST UP!"
+
+[node name="GameOverLabel" type="Control" parent="UI" unique_id=1075297792]
+layout_mode = 3
+anchor_left = 0.5
+anchor_top = 0.33
+anchor_right = 0.5
+anchor_bottom = 0.33
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackLabel" type="Label" parent="UI/GameOverLabel" unique_id=1932245625]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 8.0
+offset_bottom = 8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_u5sy4")
+theme_override_font_sizes/font_size = 120
+text = "GAME OVER"
+
+[node name="FrontLabel" type="Label" parent="UI/GameOverLabel" unique_id=1069864657]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_left = -8.0
+offset_top = -8.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.8980392, 0.25882354, 0.5254902, 1)
+theme_override_fonts/font = ExtResource("7_u5sy4")
+theme_override_font_sizes/font_size = 120
+text = "GAME OVER"
+
+[node name="MessageLabel" type="Control" parent="UI" unique_id=759080410]
+layout_mode = 3
+anchor_left = 0.5
+anchor_top = 0.65
+anchor_right = 0.5
+anchor_bottom = 0.65
+grow_horizontal = 2
+grow_vertical = 2
+
+[node name="BackLabel" type="Label" parent="UI/MessageLabel" unique_id=1542254298]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+offset_right = 4.0
+offset_bottom = 4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_u5sy4")
+theme_override_font_sizes/font_size = 56
+text = "Press Space or Click to Start"
+
+[node name="FrontLabel" type="Label" parent="UI/MessageLabel" unique_id=925180833]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.6
+offset_left = -4.0
+offset_top = -4.0
+grow_horizontal = 2
+grow_vertical = 2
+theme_override_colors/font_color = Color(0.16078432, 0.19607843, 0.40784314, 1)
+theme_override_fonts/font = ExtResource("7_u5sy4")
+theme_override_font_sizes/font_size = 56
+text = "Press Space or Click to Start"
+
+[node name="HBoxContainer" type="HBoxContainer" parent="UI" unique_id=269654008]
+anchors_preset = 1
+anchor_left = 1.0
+anchor_right = 1.0
+offset_top = 8.0
+offset_right = -40.0
+grow_horizontal = 0
+size_flags_horizontal = 3
+alignment = 2
+
+[node name="ScoreIntLabel" type="Label" parent="UI/HBoxContainer" unique_id=340203708]
+layout_mode = 2
+size_flags_horizontal = 8
+size_flags_vertical = 8
+theme_override_colors/font_color = Color(0.8980392, 0.25882354, 0.5254902, 1)
+theme_override_fonts/font = ExtResource("7_u5sy4")
+theme_override_font_sizes/font_size = 80
+text = "0"
+horizontal_alignment = 2
+
+[node name="ScoreDecLabel" type="Label" parent="UI/HBoxContainer" unique_id=874091893]
+layout_mode = 2
+size_flags_horizontal = 8
+theme_override_colors/font_color = Color(0.8980392, 0.25882354, 0.5254902, 1)
+theme_override_fonts/font = ExtResource("7_u5sy4")
+theme_override_font_sizes/font_size = 56
+text = ".00m"
+horizontal_alignment = 2
+vertical_alignment = 2
+
+[node name="HighScoreLabel" type="Label" parent="UI" unique_id=1254087371]
+anchors_preset = 3
+anchor_left = 1.0
+anchor_top = 1.0
+anchor_right = 1.0
+anchor_bottom = 1.0
+offset_right = -40.0
+offset_bottom = -4.0
+grow_horizontal = 0
+grow_vertical = 0
+theme_override_colors/font_color = Color(1, 1, 1, 1)
+theme_override_fonts/font = ExtResource("7_u5sy4")
+theme_override_font_sizes/font_size = 40
+text = "HIGH SCORE: 0.00m"
+horizontal_alignment = 2
+
+[node name="VersionLabel" type="Label" parent="UI" unique_id=576589920]
+anchors_preset = 2
+anchor_top = 1.0
+anchor_bottom = 1.0
+grow_vertical = 0
+theme_override_fonts/font = ExtResource("7_u5sy4")
+theme_override_font_sizes/font_size = 24
+text = "V0.0	"
+
+[node name="MissileTimer" type="Timer" parent="." unique_id=1539787072]
+wait_time = 4.0
+
+[node name="HighScoreSounc" type="AudioStreamPlayer" parent="." unique_id=1892750418]
+stream = ExtResource("23_bt5mj")
+volume_db = -8.0
+
+[connection signal="timeout" from="MissileTimer" to="." method="_on_missile_timer_timeout"]

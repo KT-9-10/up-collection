@@ -1,0 +1,19 @@
+[gd_scene format=3 uid="uid://dmqylxnd0itsf"]
+
+[ext_resource type="Script" uid="uid://vgvm1wbmfa2x" path="res://games/boost_up/scenes/patterns/missile_multi.gd" id="1_33ahw"]
+[ext_resource type="PackedScene" uid="uid://bcamp4oi2gbgt" path="res://games/boost_up/scenes/obstacles/missile.tscn" id="2_33ahw"]
+
+[node name="MissleMulti" type="Node2D" unique_id=1706753575]
+script = ExtResource("1_33ahw")
+
+[node name="Missile" parent="." unique_id=1900951668 instance=ExtResource("2_33ahw")]
+follow_player_y = false
+
+[node name="Missile2" parent="." unique_id=582173793 instance=ExtResource("2_33ahw")]
+follow_player_y = false
+
+[node name="Missile3" parent="." unique_id=1975993113 instance=ExtResource("2_33ahw")]
+follow_player_y = false
+
+[node name="Missile4" parent="." unique_id=61071695 instance=ExtResource("2_33ahw")]
+follow_player_y = false

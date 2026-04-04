@@ -1,0 +1,186 @@
+[gd_scene format=3 uid="uid://daoctncuf6ixw"]
+
+[ext_resource type="FontFile" uid="uid://cibl2ydj4wjkl" path="res://games/boost_up/fonts/x10y12pxDonguriDuel.ttf" id="1_70oq6"]
+[ext_resource type="Script" uid="uid://b5oo8kaeu7aem" path="res://games/main.gd" id="1_tc2pr"]
+[ext_resource type="Texture2D" uid="uid://dp82kgb52bvkm" path="res://games/flap_up/assets/sprites/Bird.png" id="2_2r714"]
+[ext_resource type="Texture2D" uid="uid://djy27cc5n4n1x" path="res://games/boost_up/graphics/player.png" id="4_01swq"]
+[ext_resource type="AudioStream" uid="uid://bynid48ferhf3" path="res://games/sfx_menu_move2.wav" id="5_ghaca"]
+[ext_resource type="AudioStream" uid="uid://b8vdfxoygd6vd" path="res://games/sfx_menu_select2.wav" id="6_hvaxu"]
+
+[sub_resource type="StyleBoxFlat" id="StyleBoxFlat_2r714"]
+bg_color = Color(0.6, 0.6, 0.6, 0)
+border_width_left = 8
+border_width_top = 8
+border_width_right = 8
+border_width_bottom = 8
+border_color = Color(1, 1, 1, 1)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_ghaca"]
+atlas = ExtResource("4_01swq")
+region = Rect2(64, 16, 16, 16)
+
+[sub_resource type="Animation" id="Animation_01swq"]
+length = 0.001
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:player_region_y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0),
+"transitions": PackedFloat32Array(1),
+"update": 1,
+"values": [16]
+}
+
+[sub_resource type="Animation" id="Animation_2r714"]
+resource_name = "player"
+length = 0.2
+loop_mode = 1
+tracks/0/type = "value"
+tracks/0/imported = false
+tracks/0/enabled = true
+tracks/0/path = NodePath(".:player_region_y")
+tracks/0/interp = 1
+tracks/0/loop_wrap = true
+tracks/0/keys = {
+"times": PackedFloat32Array(0, 0.1, 16),
+"transitions": PackedFloat32Array(1, 1, 1),
+"update": 1,
+"values": [16, 0, 16]
+}
+
+[sub_resource type="AnimationLibrary" id="AnimationLibrary_01swq"]
+_data = {
+&"RESET": SubResource("Animation_01swq"),
+&"player": SubResource("Animation_2r714")
+}
+
+[node name="Main" type="Control" unique_id=951132115]
+layout_mode = 3
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+script = ExtResource("1_tc2pr")
+
+[node name="HBoxContainer" type="HBoxContainer" parent="." unique_id=1541953330]
+layout_mode = 1
+anchors_preset = -1
+anchor_left = 0.5
+anchor_top = 0.5
+anchor_right = 0.5
+anchor_bottom = 0.5
+grow_horizontal = 2
+grow_vertical = 2
+alignment = 1
+
+[node name="VBoxContainer" type="VBoxContainer" parent="HBoxContainer" unique_id=561284955]
+layout_mode = 2
+
+[node name="Label" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=423431010]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_70oq6")
+theme_override_font_sizes/font_size = 72
+text = "UP COLLECTION"
+horizontal_alignment = 1
+
+[node name="Label2" type="Label" parent="HBoxContainer/VBoxContainer" unique_id=255051996]
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_70oq6")
+theme_override_font_sizes/font_size = 32
+text = "THE 20 GAMES CHALLENGE #1 & #2"
+horizontal_alignment = 1
+
+[node name="Spacer" type="Control" parent="HBoxContainer/VBoxContainer" unique_id=971344417]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+
+[node name="HBoxContainer" type="HBoxContainer" parent="HBoxContainer/VBoxContainer" unique_id=1842262033]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1921508629]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="FlapUpButton" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1243542168]
+custom_minimum_size = Vector2(400, 120)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_70oq6")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/focus = SubResource("StyleBoxFlat_2r714")
+text = "FLAP UP"
+
+[node name="Spacer2" type="Control" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=1943680844]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="MarginContainer" type="Control" parent="HBoxContainer/VBoxContainer/HBoxContainer" unique_id=2111186234]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Bird" type="TextureRect" parent="HBoxContainer/VBoxContainer/HBoxContainer/MarginContainer" unique_id=47940089]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+size_flags_horizontal = 4
+texture = ExtResource("2_2r714")
+stretch_mode = 5
+
+[node name="Spacer2" type="Control" parent="HBoxContainer/VBoxContainer" unique_id=1993554573]
+custom_minimum_size = Vector2(0, 24)
+layout_mode = 2
+
+[node name="HBoxContainer2" type="HBoxContainer" parent="HBoxContainer/VBoxContainer" unique_id=1423226350]
+layout_mode = 2
+
+[node name="Spacer" type="Control" parent="HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1905210890]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="BoostUpButton" type="Button" parent="HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1897519206]
+custom_minimum_size = Vector2(400, 120)
+layout_mode = 2
+theme_override_fonts/font = ExtResource("1_70oq6")
+theme_override_font_sizes/font_size = 64
+theme_override_styles/focus = SubResource("StyleBoxFlat_2r714")
+text = "BOOST UP"
+
+[node name="Spacer2" type="Control" parent="HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1207714028]
+custom_minimum_size = Vector2(40, 0)
+layout_mode = 2
+
+[node name="MarginContainer2" type="Control" parent="HBoxContainer/VBoxContainer/HBoxContainer2" unique_id=1351869677]
+custom_minimum_size = Vector2(128, 128)
+layout_mode = 2
+
+[node name="Player" type="TextureRect" parent="HBoxContainer/VBoxContainer/HBoxContainer2/MarginContainer2" unique_id=450674896]
+layout_mode = 1
+anchors_preset = 15
+anchor_right = 1.0
+anchor_bottom = 1.0
+grow_horizontal = 2
+grow_vertical = 2
+texture = SubResource("AtlasTexture_ghaca")
+stretch_mode = 5
+
+[node name="AnimationPlayer" type="AnimationPlayer" parent="." unique_id=1138138450]
+libraries/ = SubResource("AnimationLibrary_01swq")
+autoplay = &"player"
+
+[node name="MoveSE" type="AudioStreamPlayer" parent="." unique_id=1979241133]
+stream = ExtResource("5_ghaca")
+volume_db = -12.0
+
+[node name="SelectSE" type="AudioStreamPlayer" parent="." unique_id=1741812084]
+stream = ExtResource("6_hvaxu")
+volume_db = -12.0
+
+[connection signal="focus_entered" from="HBoxContainer/VBoxContainer/HBoxContainer/FlapUpButton" to="." method="_on_flap_up_button_focus_entered"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/HBoxContainer/FlapUpButton" to="." method="_on_flap_up_button_pressed"]
+[connection signal="focus_entered" from="HBoxContainer/VBoxContainer/HBoxContainer2/BoostUpButton" to="." method="_on_boost_up_button_focus_entered"]
+[connection signal="pressed" from="HBoxContainer/VBoxContainer/HBoxContainer2/BoostUpButton" to="." method="_on_boost_up_button_pressed"]

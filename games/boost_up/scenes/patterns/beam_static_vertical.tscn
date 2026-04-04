@@ -1,0 +1,21 @@
+[gd_scene format=3 uid="uid://c3ymh3ku0lbfq"]
+
+[ext_resource type="Script" uid="uid://bg6g8dfmktuq7" path="res://games/boost_up/scenes/patterns/beam_static_vertical.gd" id="1_ffd1r"]
+[ext_resource type="PackedScene" uid="uid://np5dqnc2mjee" path="res://games/boost_up/scenes/obstacles/beam_static.tscn" id="2_pvffn"]
+
+[node name="BeamStaticSingle" type="Node2D" unique_id=1706753575]
+script = ExtResource("1_ffd1r")
+
+[node name="BeamStatic" parent="." unique_id=1900951668 instance=ExtResource("2_pvffn")]
+position = Vector2(16, 32)
+rotation = -1.5707964
+body_length = 32
+
+[node name="FinishNotifier" type="VisibleOnScreenNotifier2D" parent="." unique_id=1773353843]
+position = Vector2(-120, 0)
+
+[node name="DeleteNotifier" type="VisibleOnScreenNotifier2D" parent="." unique_id=1198816825]
+position = Vector2(28, 0)
+
+[connection signal="screen_exited" from="FinishNotifier" to="." method="_on_finish_notifier_screen_exited"]
+[connection signal="screen_exited" from="DeleteNotifier" to="." method="_on_delete_notifier_screen_exited"]

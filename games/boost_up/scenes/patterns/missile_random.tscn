@@ -1,0 +1,34 @@
+[gd_scene format=3 uid="uid://6g0me6xnkj6k"]
+
+[ext_resource type="Script" uid="uid://cirkhlakksmis" path="res://games/boost_up/scenes/patterns/missile_random.gd" id="1_ph4qd"]
+[ext_resource type="PackedScene" uid="uid://bcamp4oi2gbgt" path="res://games/boost_up/scenes/obstacles/missile.tscn" id="2_qgb1a"]
+
+[node name="MissleRandom" type="Node2D" unique_id=1706753575]
+script = ExtResource("1_ph4qd")
+
+[node name="Missile" parent="." unique_id=1900951668 instance=ExtResource("2_qgb1a")]
+position = Vector2(0, -48)
+follow_player_y = false
+
+[node name="Missile2" parent="." unique_id=582173793 instance=ExtResource("2_qgb1a")]
+position = Vector2(0, -32)
+follow_player_y = false
+
+[node name="Missile3" parent="." unique_id=1975993113 instance=ExtResource("2_qgb1a")]
+position = Vector2(0, -16)
+follow_player_y = false
+
+[node name="Missile4" parent="." unique_id=61071695 instance=ExtResource("2_qgb1a")]
+follow_player_y = false
+
+[node name="Missile5" parent="." unique_id=388041042 instance=ExtResource("2_qgb1a")]
+position = Vector2(0, 16)
+follow_player_y = false
+
+[node name="Missile6" parent="." unique_id=596595683 instance=ExtResource("2_qgb1a")]
+position = Vector2(0, 32)
+follow_player_y = false
+
+[node name="Missile7" parent="." unique_id=1217083728 instance=ExtResource("2_qgb1a")]
+position = Vector2(0, 48)
+follow_player_y = false

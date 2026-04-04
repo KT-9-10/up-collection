@@ -1,0 +1,25 @@
+[gd_scene format=3 uid="uid://76qagyfh23im"]
+
+[ext_resource type="Script" uid="uid://cbc2qt7evje4c" path="res://games/boost_up/scenes/bird.gd" id="1_ecfi2"]
+[ext_resource type="Texture2D" uid="uid://bu6lgtvsad207" path="res://games/boost_up/graphics/bird.png" id="2_3po83"]
+[ext_resource type="AudioStream" uid="uid://c74efb7p7p8np" path="res://games/boost_up/sounds/sfx_movement_jump10.wav" id="3_hq4t0"]
+
+[node name="Bird" type="CharacterBody2D" unique_id=1446451962]
+script = ExtResource("1_ecfi2")
+
+[node name="Sprite2D" type="Sprite2D" parent="." unique_id=1031126138]
+scale = Vector2(0.75, 0.75)
+texture = ExtResource("2_3po83")
+
+[node name="JumpTimer" type="Timer" parent="." unique_id=1534905957]
+wait_time = 0.5
+
+[node name="JumpSE" type="AudioStreamPlayer" parent="." unique_id=1466860276]
+stream = ExtResource("3_hq4t0")
+volume_db = -16.0
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=389805890]
+rect = Rect2(-15, -15, 30, 30)
+
+[connection signal="timeout" from="JumpTimer" to="." method="_on_jump_timer_timeout"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

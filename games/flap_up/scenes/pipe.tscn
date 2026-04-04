@@ -1,0 +1,64 @@
+[gd_scene format=3 uid="uid://l34jwq0bdvlm"]
+
+[ext_resource type="Script" uid="uid://b6uid7xdb5wfb" path="res://scenes/pipe.gd" id="1_8p0di"]
+[ext_resource type="Texture2D" uid="uid://dmvropml4acq4" path="res://assets/sprites/pipe_cap.png" id="1_arpqm"]
+[ext_resource type="Texture2D" uid="uid://b55qmtbihtr86" path="res://assets/sprites/pipe_body.png" id="2_8p0di"]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_arpqm"]
+size = Vector2(12, 176)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_8p0di"]
+size = Vector2(12, 176)
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_ejsh2"]
+size = Vector2(2, 100)
+
+[node name="Pipe" type="Node2D" unique_id=1871878881]
+script = ExtResource("1_8p0di")
+
+[node name="TopPipe" type="Area2D" parent="." unique_id=1026951763]
+position = Vector2(0, -40)
+collision_layer = 2
+
+[node name="TopCapSprite" type="Sprite2D" parent="TopPipe" unique_id=1049556164]
+texture = ExtResource("1_arpqm")
+flip_v = true
+
+[node name="TopBodySprite" type="Sprite2D" parent="TopPipe" unique_id=1994394330]
+position = Vector2(0, -88)
+scale = Vector2(1, 10)
+texture = ExtResource("2_8p0di")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="TopPipe" unique_id=2025863028]
+position = Vector2(0, -80)
+shape = SubResource("RectangleShape2D_arpqm")
+
+[node name="BottomPipe" type="Area2D" parent="." unique_id=361425466]
+position = Vector2(0, 40)
+collision_layer = 2
+
+[node name="BottomCapSprite" type="Sprite2D" parent="BottomPipe" unique_id=1721998611]
+texture = ExtResource("1_arpqm")
+
+[node name="BottomBodySprite" type="Sprite2D" parent="BottomPipe" unique_id=1475347573]
+position = Vector2(0, 88)
+scale = Vector2(1, 10)
+texture = ExtResource("2_8p0di")
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="BottomPipe" unique_id=977622912]
+position = Vector2(0, 80)
+shape = SubResource("RectangleShape2D_8p0di")
+
+[node name="ScoreArea" type="Area2D" parent="." unique_id=1812787722]
+collision_layer = 0
+
+[node name="CollisionShape2D" type="CollisionShape2D" parent="ScoreArea" unique_id=1775881949]
+position = Vector2(14, 0)
+shape = SubResource("RectangleShape2D_ejsh2")
+
+[node name="VisibleOnScreenNotifier2D" type="VisibleOnScreenNotifier2D" parent="." unique_id=381988112]
+
+[connection signal="body_entered" from="TopPipe" to="." method="_on_top_pipe_body_entered"]
+[connection signal="body_entered" from="BottomPipe" to="." method="_on_bottom_pipe_body_entered"]
+[connection signal="body_entered" from="ScoreArea" to="." method="_on_score_area_body_entered"]
+[connection signal="screen_exited" from="VisibleOnScreenNotifier2D" to="." method="_on_visible_on_screen_notifier_2d_screen_exited"]

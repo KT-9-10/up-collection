@@ -1,0 +1,98 @@
+[gd_scene format=3 uid="uid://cjgmyucfcgbjc"]
+
+[ext_resource type="Script" uid="uid://c85iwy05x7xrq" path="res://games/boost_up/scenes/obstacles/beam_rotate.gd" id="1_8gbm6"]
+[ext_resource type="Texture2D" uid="uid://bbv4d7xk7xurh" path="res://games/boost_up/graphics/beam_blue.png" id="2_8gbm6"]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_euphx"]
+atlas = ExtResource("2_8gbm6")
+region = Rect2(0, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_bcsj2"]
+atlas = ExtResource("2_8gbm6")
+region = Rect2(0, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_1cwmx"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_euphx")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_bcsj2")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_cr4ew"]
+atlas = ExtResource("2_8gbm6")
+region = Rect2(16, 0, 16, 16)
+
+[sub_resource type="AtlasTexture" id="AtlasTexture_015sx"]
+atlas = ExtResource("2_8gbm6")
+region = Rect2(16, 16, 16, 16)
+
+[sub_resource type="SpriteFrames" id="SpriteFrames_cmnws"]
+animations = [{
+"frames": [{
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_cr4ew")
+}, {
+"duration": 1.0,
+"texture": SubResource("AtlasTexture_015sx")
+}],
+"loop": true,
+"name": &"default",
+"speed": 6.0
+}]
+
+[sub_resource type="RectangleShape2D" id="RectangleShape2D_6vpq4"]
+size = Vector2(34, 4)
+
+[node name="BeamRotate" type="Area2D" unique_id=1900951668]
+rotation = 2566.1968
+collision_layer = 4
+collision_mask = 2
+script = ExtResource("1_8gbm6")
+rotatetion_speed_min = 180
+rotatetion_speed_max = 180
+
+[node name="Sprites" type="Node2D" parent="." unique_id=1713965528]
+position = Vector2(-40, -8)
+
+[node name="BeamStart" type="AnimatedSprite2D" parent="Sprites" unique_id=1344201551]
+sprite_frames = SubResource("SpriteFrames_1cwmx")
+frame_progress = 0.84039307
+centered = false
+
+[node name="BeamBody" type="AnimatedSprite2D" parent="Sprites" unique_id=1653604705]
+position = Vector2(16, 0)
+sprite_frames = SubResource("SpriteFrames_cmnws")
+frame_progress = 0.84039307
+centered = false
+
+[node name="BeamBody2" type="AnimatedSprite2D" parent="Sprites" unique_id=119021700]
+position = Vector2(32, 0)
+sprite_frames = SubResource("SpriteFrames_cmnws")
+frame_progress = 0.84039307
+centered = false
+
+[node name="BeamBody3" type="AnimatedSprite2D" parent="Sprites" unique_id=1261195409]
+position = Vector2(48, 0)
+sprite_frames = SubResource("SpriteFrames_cmnws")
+frame_progress = 0.84039307
+centered = false
+
+[node name="BeamEnd" type="AnimatedSprite2D" parent="Sprites" unique_id=1395126199]
+position = Vector2(64, 0)
+sprite_frames = SubResource("SpriteFrames_1cwmx")
+frame_progress = 0.84039307
+centered = false
+flip_h = true
+
+[node name="CollisionBody" type="CollisionShape2D" parent="." unique_id=1979318743]
+scale = Vector2(2, 1)
+shape = SubResource("RectangleShape2D_6vpq4")
+
+[connection signal="body_entered" from="." to="." method="_on_body_entered"]
