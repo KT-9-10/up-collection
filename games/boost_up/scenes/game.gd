@@ -167,6 +167,7 @@ func on_pattern_finished() -> void:
 
 
 func _on_player_hit() -> void:
+	$BirdTimer.stop()
 	shake_camera()
 	current_state = State.DYING
 
@@ -258,12 +259,13 @@ func pick_weighted_type(t_data: Array) -> int:
 
 	return t_data[0].type
 
+
 # scoreによってprogress_lebelを更新する
 func update_progress_lebel() -> void:
 	if progress_level <= 1 and score > 60 :
 		progress_level = 2
 		return
-	if progress_level == 2  and score > 88 :
+	if progress_level == 2  and score > 85 :
 		progress_level = 3
 		spawn_bird()
 		return
@@ -273,10 +275,12 @@ func update_progress_lebel() -> void:
 	if progress_level == 4  and score > 300 :
 		progress_level = 5
 		update_background_color(0.5, 6.0)
+		$BirdTimer.start()
 		return
 	if progress_level == 5  and score > 500 :
 		progress_level = 6
 		update_background_color(1.0, 6.0)
+		$BirdTimer.stop()
 		return
 	if progress_level == 6  and score > 700 :
 		progress_level = 7
@@ -337,7 +341,6 @@ func spawn_obstacles() -> void:
 			spawn_missile_single()
 			
 	accelerate_scroll_speed()
-
 
 
 func _on_missile_timer_timeout() -> void:
@@ -401,3 +404,8 @@ func shake_camera():
 			0.03
 		)
 	tween.tween_property($Camera2D, "offset", Vector2.ZERO, 0.05)
+
+
+func _on_bird_timer_timeout() -> void:
+	if randf() < 0.3:
+		spawn_bird()

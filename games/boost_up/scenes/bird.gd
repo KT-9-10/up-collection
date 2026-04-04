@@ -29,7 +29,7 @@ func _process(delta: float) -> void:
 	move_and_slide()
 	
 	# 移動
-	position.x -= (scroll_speed - 60) * delta 
+	position.x -= (scroll_speed * 0.95 - 60) * delta 
 
 
 func jump() -> void:

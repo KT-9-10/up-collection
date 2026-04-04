@@ -513,4 +513,8 @@ wait_time = 4.0
 stream = ExtResource("23_bt5mj")
 volume_db = -8.0
 
+[node name="BirdTimer" type="Timer" parent="." unique_id=723309190]
+wait_time = 0.5
+
 [connection signal="timeout" from="MissileTimer" to="." method="_on_missile_timer_timeout"]
+[connection signal="timeout" from="BirdTimer" to="." method="_on_bird_timer_timeout"]
